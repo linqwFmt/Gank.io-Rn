@@ -10,6 +10,16 @@ let window = {
     pixel: 1.0 / PixelRatio.get(),
 }
 
-export default {
-    window:window
+let defaultColor={
+    html:'#EF6C02',
+    extend:'#54647A',
+    reset:'#039588',
+    iOS:'#0a7bbe',
+    android:'#388e3c'
 }
+
+export default {
+    window:window,
+    defaultColor:defaultColor
+}
+

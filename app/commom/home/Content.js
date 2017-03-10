@@ -11,7 +11,7 @@ import {
     StyleSheet,
     Text
 }from 'react-native'
-var color;
+import defalutColor from '../Constants'
 export default class ContentItem extends Component {
 
     render() {
@@ -74,19 +74,19 @@ var styles = StyleSheet.create({
         fontSize: 18
     },
     androidTitle:{
-        color:'#388e3c'
+        color:defalutColor.android
     },
     iOSTitle:{
-        color:'#0a7bbe'
+        color:defalutColor.iOS
     },
     restTitle:{
-    color:'#039588'
+    color:defalutColor.reset
    },
     extentTitle:{
-        color:'#54647A'
+        color:defalutColor.extend
     },
     htmlTitle:{
-        color:'#EF6C02'
+        color:defalutColor.html
     },
     desc: {
          color:'#161615'
