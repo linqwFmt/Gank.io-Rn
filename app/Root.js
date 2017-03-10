@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {getGanHuoDatasToDay,getGankHuoDatesHistory} from './utils/ApiProvider'
 import Head from '../app/commom/home/Head'
+import ContentItem from '../app/commom/home/Content'
 import {toastShort} from './utils/ToastUtils'
 export default class Root extends Component {
 
@@ -18,6 +19,7 @@ export default class Root extends Component {
         super(props);
         this.state={
             ganhuo:[],
+            fuli:null,
             dataSource:new ListView.DataSource({
                 rowHasChanged:(r1,r2)=>r1!==r2
             }),
@@ -33,11 +35,11 @@ export default class Root extends Component {
             datas.push(response.iOS);
             datas.push(response.休息视频);
             datas.push(response.拓展资源);
-            datas.push(response.福利);
             console.log(datas);
             this.setState({
-                ganhuo:datas
-            })
+                ganhuo:datas,
+                fuli: response.福利
+        })
         })
     }
     render(){
@@ -49,11 +51,11 @@ export default class Root extends Component {
         )
     };
     _renderRow(rowData,sectionId,rowId){
-        return(<Text>Body</Text>)
+        return(<ContentItem datas={rowData}/>)
     }
     _renderHeader(){
         if (this.state.ganhuo!=null&&this.state.ganhuo.length>0){
-            return(<Head url={this.state.ganhuo[4][0].url}/>)
+            return(<Head url={this.state.fuli[0].url}/>)
         }else {
             return null
         }
