@@ -42,7 +42,6 @@ export default class ContentItem extends Component {
 
     _listItem() {
         let mViews = [];
-        console.log(this.props.datas.length)
         for (let i = 0; i < this.props.datas.length; i++)
             mViews.push(this._article(this.props.datas[i].desc, this.props.datas[i].who))
         return (

@@ -7,12 +7,15 @@ import {
     StyleSheet,
     Text,
     View,
-    ListView
+    ListView,
+    DrawerLayoutAndroid
 } from 'react-native';
 import {getGanHuoDatasToDay,getGankHuoDatesHistory} from './utils/ApiProvider'
 import Head from '../app/commom/home/Head'
 import ContentItem from '../app/commom/home/Content'
 import {toastShort} from './utils/ToastUtils'
+import DrawerView from './commom/DrawerView'
+
 export default class Root extends Component {
 
     constructor(props){
@@ -23,6 +26,7 @@ export default class Root extends Component {
             dataSource:new ListView.DataSource({
                 rowHasChanged:(r1,r2)=>r1!==r2
             }),
+            selectIndex:0
         }
     }
     componentWillMount() {
@@ -43,13 +47,30 @@ export default class Root extends Component {
         })
     }
     render(){
+
+
+        return(
+            <DrawerLayoutAndroid
+                drawerWidth={170}
+                drawerPosition={DrawerLayoutAndroid.positions.right}
+                renderNavigationView={this._renderDrawView}>
+                {this._renderList()}
+            </DrawerLayoutAndroid>
+        )
+    }
+    _renderDrawView(){
+       return(
+          <DrawerView/>
+       );
+    }
+    _renderList(){
         return(
             <ListView  dataSource={this.state.dataSource.cloneWithRows(this.state.ganhuo)}
-                      renderRow={this._renderRow.bind(this)}
+                       renderRow={this._renderRow.bind(this)}
                        renderHeader={this._renderHeader.bind(this)}
-                      />
+            />
         )
-    };
+    }
     _renderRow(rowData,sectionId,rowId){
         return(<ContentItem datas={rowData}/>)
     }
