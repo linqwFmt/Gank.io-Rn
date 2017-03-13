@@ -65,7 +65,7 @@ export default class Root extends Component {
     }
     _renderList(){
         return(
-            <ListView  dataSource={this.state.dataSource.cloneWithRows(this.state.ganhuo)}
+            <ListView   dataSource={this.state.dataSource.cloneWithRows(this.state.ganhuo)}
                        renderRow={this._renderRow.bind(this)}
                        renderHeader={this._renderHeader.bind(this)}
             />
