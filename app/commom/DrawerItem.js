@@ -10,7 +10,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-
+import * as Type from '../action/ActionTypes';
 export default class DrawItem extends Component{
 
     constructor(props){
@@ -23,7 +23,13 @@ export default class DrawItem extends Component{
     }
 
     _onClick(){
-       console.log(this.state.index)
+        const {dispatch} = this.props;
+        dispatch({
+            type:Type.DRAWERLAYOUTREDUCER,
+            data:{
+                index:this.state.index
+            }
+        })
     }
 
     render(){
