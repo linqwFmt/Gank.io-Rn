@@ -14,12 +14,13 @@ import {
 import {toastShort} from './utils/ToastUtils'
 import DrawerView from './commom/DrawerView'
 import Daily from './commom/home/Daily'
-export default class Root extends Component {
+import {connect}from'react-redux'
+ class Root extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectIndex: 0,
+            drawerLayout: this.props.drawerLayout,
         }
     }
 
@@ -33,18 +34,28 @@ export default class Root extends Component {
                 </DrawerLayoutAndroid>
         )
     }
-    _renderDrawView() {
+    _renderDrawView = () =>{
         return (
-            <DrawerView/>
+            <DrawerView dispatch={this.props.dispatch} />
         );
     }
     _renderList() {
-        if(this.state.selectIndex==0){
-            return(<Daily/>)
+        if(this.state.drawerLayout.selectIndex==0){
+            return(<Daily  />)
         }else {
-            return(<Daily/>)
+            return(<Daily />)
         }
     }
+
 }
+
+
+function select(state) {
+    return{
+        drawerLayout: state.drawerLayout
+    }
+}
+export default connect(select)(Root)
+
 
 

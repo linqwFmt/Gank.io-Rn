@@ -23,14 +23,18 @@ export default class DrawItem extends Component{
     }
 
     _onClick(){
-        const {dispatch} = this.props;
-        dispatch({
+        let {dispatch}=this.props
+        dispatch(this._getIndex())
+    }
+
+   _getIndex(){
+        return{
             type:Type.DRAWERLAYOUTREDUCER,
             data:{
-                index:this.state.index
+                selectIndex:this.state.index
             }
-        })
-    }
+        }
+   }
 
     render(){
       return(

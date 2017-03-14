@@ -9,5 +9,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import Root from './app/Root'
-AppRegistry.registerComponent('gank', () => Root);
+import App from './app/App'
+
+AppRegistry.registerComponent('gank', () => App);

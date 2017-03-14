@@ -17,14 +17,13 @@ export default class DrawerView extends Component{
         let drawItemViews=[];
         for(let i=0;i<drawItems.length;i++){
                 drawItemViews.push(
-                   <DrawItem label={drawItems[i].title} index={i} />
+                   <DrawItem dispatch={this.props.dispatch}  label={drawItems[i].title} index={i} />
                 )
         }
         return(
             <View>
                 {drawItemViews}
             </View>
-
         )
     }
 }
