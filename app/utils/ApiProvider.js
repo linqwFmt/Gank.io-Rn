@@ -33,7 +33,9 @@ const GanHuoDataByDay = GanHuoBaseUrl + "day/";
 export function getGankHuoDatesHistory() {
     return getJsonData(GankHuoDates);
 }
-
+export function getDatas(type,page,num) {
+    return getJsonData(GankData+type+"/"+page+"/"+num);
+}
 
 export function getGanHuoDatasToDay() {
      return getGankHuoDatesHistory()

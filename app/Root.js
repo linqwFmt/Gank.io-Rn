@@ -14,6 +14,7 @@ import {
 import {toastShort} from './utils/ToastUtils'
 import DrawerView from './commom/DrawerView'
 import Daily from './commom/home/Daily'
+import Welfare from './commom/home/Welfare'
 import {connect}from'react-redux'
  class Root extends Component {
 
@@ -26,12 +27,13 @@ import {connect}from'react-redux'
 
     render() {
         return (
-                <DrawerLayoutAndroid
-                    drawerWidth={170}
-                    drawerPosition={DrawerLayoutAndroid.positions.right}
-                    renderNavigationView={this._renderDrawView}>
-                    {this._renderList()}
-                </DrawerLayoutAndroid>
+        <Welfare  />
+                // <DrawerLayoutAndroid
+                //     drawerWidth={170}
+                //     drawerPosition={DrawerLayoutAndroid.positions.right}
+                //     renderNavigationView={this._renderDrawView}>
+                //     {this._renderList()}
+                // </DrawerLayoutAndroid>
         )
     }
     _renderDrawView = () =>{
@@ -41,9 +43,11 @@ import {connect}from'react-redux'
     }
     _renderList() {
         if(this.state.drawerLayout.selectIndex==0){
-            return(<Daily  />)
+            return(<Welfare  />)
+        }else if (this.state.drawerLayout.selectIndex==1){
+            return(<Welfare/>)
         }else {
-            return(<Daily />)
+            return(<Welfare />)
         }
     }
 
