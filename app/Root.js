@@ -27,13 +27,12 @@ import {connect}from'react-redux'
 
     render() {
         return (
-        <Welfare  />
-                // <DrawerLayoutAndroid
-                //     drawerWidth={170}
-                //     drawerPosition={DrawerLayoutAndroid.positions.right}
-                //     renderNavigationView={this._renderDrawView}>
-                //     {this._renderList()}
-                // </DrawerLayoutAndroid>
+                <DrawerLayoutAndroid
+        drawerWidth={170}
+        drawerPosition={DrawerLayoutAndroid.positions.right}
+        renderNavigationView={this._renderDrawView}>
+        {this._renderList()}
+    </DrawerLayoutAndroid>
         )
     }
     _renderDrawView = () =>{

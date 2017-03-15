@@ -36,6 +36,8 @@ export default class Daily extends Component{
             datas.push(response.iOS);
             datas.push(response.休息视频);
             datas.push(response.拓展资源);
+            datas.push(response.瞎推荐);
+            datas.push(response.前端);
             console.log(datas);
             this.setState({
                 ganhuo: datas,
@@ -44,6 +46,7 @@ export default class Daily extends Component{
         })
     }
     render(){
+        if(this.state.ganhuo==null||this.state.ganhuo.length==0)return null
         return (
             <ListView  dataSource={this.state.dataSource.cloneWithRows(this.state.ganhuo)}
                        renderRow={this._renderRow.bind(this)}
@@ -52,6 +55,7 @@ export default class Daily extends Component{
         )
     }
     _renderRow(rowData, sectionId, rowId) {
+        if (rowData==null)return null
         return (<ContentItem datas={rowData}/>)
     }
     _renderHeader() {

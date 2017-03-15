@@ -57,15 +57,15 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
             @Override
             public void onRefresh() {
                 WritableMap nativeEvent=  Arguments.createMap();
-                nativeEvent.putString("onRefresh","onRefresh");
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'onRefresh'",nativeEvent);
+                nativeEvent.putString("msg", "MyMsg");
+                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'topChange'",nativeEvent);
             }
 
             @Override
             public void onLoadMore() {
                 WritableMap nativeEvent=  Arguments.createMap();
-                nativeEvent.putString("onLoadMore","onLoadMore");
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'onLoadMore'",nativeEvent);
+                nativeEvent.putString("msg", "MyMsg");
+                    reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'topChange'",nativeEvent);
             }
         });
     }

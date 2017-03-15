@@ -48,18 +48,21 @@ export default class Welfare extends Component {
     }
 
     render() {
+
         return (
             <ReactWaterfallView style={styles.container}
                                 data={this.state.datas}
-                                onChange={this._onChange}
+                                onChange={(event)=>{
+                                        toastShort('event')
+                                }}
             >
 
             </ReactWaterfallView>
         )
     }
 
-    _onChange= (event: Event) => {
-        console.log('ss')
+    _onChange(event)  {
+        toastShort('event')
     };
 
     _onLoadMore() {
