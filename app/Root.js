@@ -14,6 +14,7 @@ import {
 import {toastShort} from './utils/ToastUtils'
 import DrawerView from './commom/DrawerView'
 import Daily from './commom/home/Daily'
+import ProgrammingItem from './commom/home/Programming'
 import Welfare from './commom/home/Welfare'
 import {connect}from'react-redux'
 class Root extends Component {
@@ -43,11 +44,19 @@ class Root extends Component {
 
     _renderList() {
         if (this.props.selectIndex == 0) {
-            return (<Welfare  />)
+            return (<Daily  />)
         } else if (this.props.selectIndex == 1) {
             return (<Welfare/>)
+        } else if(this.props.selectIndex==2){
+            return(<ProgrammingItem type="Android"/>)
+        } else if(this.props.selectIndex==3){
+            return(<ProgrammingItem type="iOS"/>)
+        } else if(this.props.selectIndex==4){
+            return(<ProgrammingItem type="前端"/>)
+        }else if (this.props.selectIndex == 5) {
+            return (<Welfare/>)
         } else {
-            return (<Welfare />)
+            return (<Welfare/>)
         }
     }
 
