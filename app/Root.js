@@ -16,37 +16,38 @@ import DrawerView from './commom/DrawerView'
 import Daily from './commom/home/Daily'
 import Welfare from './commom/home/Welfare'
 import {connect}from'react-redux'
- class Root extends Component {
+class Root extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            drawerLayout: this.props.drawerLayout,
-        }
     }
 
     render() {
+        console.log('render')
+        console.log(this.props.selectIndex)
         return (
-                <DrawerLayoutAndroid
-        drawerWidth={170}
-        drawerPosition={DrawerLayoutAndroid.positions.right}
-        renderNavigationView={this._renderDrawView}>
-        {this._renderList()}
-    </DrawerLayoutAndroid>
+            <DrawerLayoutAndroid
+                drawerWidth={170}
+                drawerPosition={DrawerLayoutAndroid.positions.right}
+                renderNavigationView={this._renderDrawView}>
+                {this._renderList()}
+            </DrawerLayoutAndroid>
         )
     }
-    _renderDrawView = () =>{
+
+    _renderDrawView = () => {
         return (
-            <DrawerView dispatch={this.props.dispatch} />
+            <DrawerView dispatch={this.props.dispatch}/>
         );
     }
+
     _renderList() {
-        if(this.state.drawerLayout.selectIndex==0){
-            return(<Welfare  />)
-        }else if (this.state.drawerLayout.selectIndex==1){
-            return(<Welfare/>)
-        }else {
-            return(<Welfare />)
+        if (this.props.selectIndex == 0) {
+            return (<Daily  />)
+        } else if (this.props.selectIndex == 1) {
+            return (<Welfare/>)
+        } else {
+            return (<Welfare />)
         }
     }
 
@@ -54,8 +55,8 @@ import {connect}from'react-redux'
 
 
 function select(state) {
-    return{
-        drawerLayout: state.drawerLayout
+    return {
+        selectIndex: state.drawerLayout.selectIndex
     }
 }
 export default connect(select)(Root)

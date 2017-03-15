@@ -82,7 +82,6 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
     @ReactProp(name = "data")
     public void setData(RecyclerView view,String jsonUrl){
         if (TextUtils.isEmpty(jsonUrl))return;
-        Toast.makeText(view.getContext(),jsonUrl,Toast.LENGTH_LONG).show();
         List<Img> url= JSON.parseArray(jsonUrl, Img.class);
         this.url=url;
         mWaterfallAdapter.setDatas(url);
