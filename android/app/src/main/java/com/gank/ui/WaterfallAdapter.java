@@ -1,12 +1,15 @@
 package com.gank.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gank.R;
 import com.gank.model.Img;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,22 +25,17 @@ import android.widget.ImageView;
 public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.WaterfallViewHolder> {
 
     private List<Img> mDataModels;
-    private List<Integer> heightList;
+    private HashMap<String,Integer> maps;
 
-    WaterfallAdapter(List<Img> dataModels) {
+    private int defalutWidth,defaultHight;
+
+    WaterfallAdapter(Context context,List<Img> dataModels) {
         mDataModels = dataModels;
-        initHeights();
-    }
-
-    private void initHeights() {
-        if (mDataModels != null) {
-            heightList = new ArrayList<>();
-            for (int i = 0; i < mDataModels.size(); i++) {
-                int height = (int) (Math.random() * 400 + 400);
-                heightList.add(height);
-            }
+        if (maps==null){
+            maps=new HashMap<>();
         }
     }
+
 
     @Override
     public WaterfallViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -50,12 +48,17 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
     public void onBindViewHolder(WaterfallViewHolder holder, int position) {
         String url = mDataModels.get(position).url;
 //        //改变holder.button的高度
-        int height = heightList.get(position);
+        Integer height = maps.get(url);
+        if (height==null||height.equals(0)){
+            height = (int) (Math.random() * 400 + 400);
+            maps.put(url,height);
+        }
         ViewGroup.LayoutParams lp = holder.mIv.getLayoutParams();
         lp.height = height;
         holder.mIv.setLayoutParams(lp);
         holder.load(url);
     }
+
 
     @Override
     public int getItemCount() {
@@ -65,7 +68,7 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
 
     public void setDatas(List<Img> datas) {
         mDataModels = datas;
-        initHeights();
+
 
         notifyDataSetChanged();
     }
@@ -80,7 +83,7 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
         }
 
         public void load(String url) {
-            Glide.with(mIv.getContext()).load(url).into(mIv);
+            Glide.with(mIv.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(mIv);
         }
     }
 }

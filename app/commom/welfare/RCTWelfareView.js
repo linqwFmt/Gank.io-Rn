@@ -1,13 +1,31 @@
 /**
  * Created by Administrator on 2017/3/14.
  */
-import {PropTypes} from 'react';
-import {requireNativeComponent, View,} from 'react-native';
-var ReactWaterfallView = {
-    name: 'ReactWaterfallView',
-    propTypes: {
-        data:PropTypes.string,
-        ...View.propTypes,//添加默认View的属性，否则会导致各种属性未定义错误
-    },
-};
-module.exports = requireNativeComponent('ReactWaterfallView', ReactWaterfallView);
+import React, {Component, PropTypes}from 'react';
+
+import RCTWaterfallView from './RCTWelfareViewManager';
+
+export default class RcWaterfallView extends Component {
+    //默认属性定义使用static propTypes
+    static propTypes = {
+        onLoadMore: PropTypes.func,
+        onRefresh:PropTypes.func
+    };
+
+    render() {
+        return (
+            <RCTWaterfallView
+                {...this.props}
+                onChange={this._onChange}
+            />
+        );
+    }
+
+    _onChange = (event: Event) => {
+        if(event.nativeEvent.msg=='onLoadMore'){
+            this.props.onLoadMore(event.nativeEvent.msg);
+        }else{
+            this.props.onRefresh(event.nativeEvent.msg);
+        }
+    };
+}

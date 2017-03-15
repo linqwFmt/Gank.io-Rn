@@ -43,7 +43,7 @@ class Root extends Component {
 
     _renderList() {
         if (this.props.selectIndex == 0) {
-            return (<Daily  />)
+            return (<Welfare  />)
         } else if (this.props.selectIndex == 1) {
             return (<Welfare/>)
         } else {

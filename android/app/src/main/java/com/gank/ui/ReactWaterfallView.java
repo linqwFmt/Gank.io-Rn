@@ -22,6 +22,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +44,7 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
         return "ReactWaterfallView";
     }
     @Override
-    protected RecyclerView createViewInstance(ThemedReactContext reactContext) {
+    protected RecyclerView createViewInstance(final ThemedReactContext reactContext) {
         mMRecycleView= (XRecyclerView) LayoutInflater.from(reactContext).inflate(R.layout.item_react_water_fall,null);
         initRecyclerView( reactContext,mMRecycleView);
         return mMRecycleView;
@@ -50,22 +52,27 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
     private void initRecyclerView(final ThemedReactContext reactContext,final RecyclerView recyclerView) {
         //        recyclerView.setHasFixedSize(true); // 设置固定大小
         initRecyclerLayoutManager(recyclerView); // 初始化布局
-        initRecyclerAdapter(recyclerView); // 初始化适配器
+        initRecyclerAdapter(reactContext,recyclerView); // 初始化适配器
         initItemDecoration(recyclerView); // 初始化装饰
         initItemAnimator(recyclerView); // 初始化动画效果
         mMRecycleView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                WritableMap nativeEvent=  Arguments.createMap();
-                nativeEvent.putString("msg", "MyMsg");
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'topChange'",nativeEvent);
+                mMRecycleView.refreshComplete();
+               WritableMap nativeEvent = Arguments.createMap();
+               nativeEvent.putString("msg", "onRefresh");
+               reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(), "topChange", nativeEvent);
+
             }
 
             @Override
             public void onLoadMore() {
-                WritableMap nativeEvent=  Arguments.createMap();
-                nativeEvent.putString("msg", "MyMsg");
-                    reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(),"'topChange'",nativeEvent);
+                mMRecycleView.loadMoreComplete();
+
+                WritableMap nativeEvent = Arguments.createMap();
+                               nativeEvent.putString("msg", "onLoadMore");
+                               reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(), "topChange", nativeEvent);
+
             }
         });
     }
@@ -74,8 +81,8 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
     }
-    private void initRecyclerAdapter(RecyclerView recyclerView) {
-        mWaterfallAdapter = new WaterfallAdapter(url);
+    private void initRecyclerAdapter(ThemedReactContext context,RecyclerView recyclerView) {
+        mWaterfallAdapter = new WaterfallAdapter(context,url);
         recyclerView.setAdapter(mWaterfallAdapter);
     }
 

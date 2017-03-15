@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import {getDatas} from '../../utils/ApiProvider'
-import ReactWaterfallView from '../welfare/RCTWelfareView';
+import RcWaterfallView from '../welfare/RCTWelfareView';
 export default class Welfare extends Component {
 
     constructor(props) {
@@ -25,6 +25,8 @@ export default class Welfare extends Component {
             num: 1,
             datas: ''
         }
+        this._onLoadMore = this._onLoadMore.bind(this);
+        this._onRefresh = this._onRefresh.bind(this);
     }
 
     componentWillMount() {
@@ -33,8 +35,12 @@ export default class Welfare extends Component {
 
     getWelfare = () => {
         getDatas(this.state.type, this.state.page, this.state.num).then(response => {
-            console.log(response)
+            let datas = this.state.datas;
             let urls = []
+            if (this.state.num==1) {
+            }else if (this.state.num>1){
+                urls= JSON.parse(datas);
+            }
             response.map(r1 => {
                 let img = {
                     url: r1.url,
@@ -48,29 +54,28 @@ export default class Welfare extends Component {
     }
 
     render() {
-
         return (
-            <ReactWaterfallView style={styles.container}
-                                data={this.state.datas}
-                                onChange={(event)=>{
-                                        toastShort('event')
-                                }}
+            <RcWaterfallView style={styles.container}
+                             data={this.state.datas}
+                             onLoadMore={this._onLoadMore}
+                             onRefresh={this._onRefresh}
             >
-
-            </ReactWaterfallView>
+            </RcWaterfallView>
         )
     }
 
-    _onChange(event)  {
-        toastShort('event')
-    };
-
     _onLoadMore() {
-      console.log('_onLoadMore')
+        this.setState({
+            num: ++this.state.num,
+        })
+        this.getWelfare()
     }
 
     _onRefresh() {
-        console.log('_onRefresh')
+        this.setState({
+            num: 1,
+        })
+        this.getWelfare()
     }
 }
 
