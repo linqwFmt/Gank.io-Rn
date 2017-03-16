@@ -51,12 +51,13 @@ export default class Daily extends Component{
             <ListView  dataSource={this.state.dataSource.cloneWithRows(this.state.ganhuo)}
                        renderRow={this._renderRow.bind(this)}
                        renderHeader={this._renderHeader.bind(this)}
+                       enableEmptySections={true}
             />
         )
     }
     _renderRow(rowData, sectionId, rowId) {
         if (rowData==null)return null
-        return (<ContentItem datas={rowData}/>)
+        return (<ContentItem key={rowId} datas={rowData}/>)
     }
     _renderHeader() {
         if (this.state.ganhuo != null && this.state.ganhuo.length > 0) {

@@ -24,8 +24,6 @@ class Root extends Component {
     }
 
     render() {
-        console.log('render')
-        console.log(this.props.selectIndex)
         return (
             <DrawerLayoutAndroid
                 drawerWidth={170}
@@ -48,11 +46,11 @@ class Root extends Component {
         } else if (this.props.selectIndex == 1) {
             return (<Welfare/>)
         } else if(this.props.selectIndex==2){
-            return(<ProgrammingItem type="Android"/>)
+            return(<ProgrammingItem  type="Android"/>)
         } else if(this.props.selectIndex==3){
-            return(<ProgrammingItem type="iOS"/>)
+            return(<ProgrammingItem  type="iOS"/>)
         } else if(this.props.selectIndex==4){
-            return(<ProgrammingItem type="前端"/>)
+            return(<ProgrammingItem  type="前端"/>)
         }else if (this.props.selectIndex == 5) {
             return (<Welfare/>)
         } else {
