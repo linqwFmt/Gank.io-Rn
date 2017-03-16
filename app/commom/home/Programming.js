@@ -1,17 +1,13 @@
 /**
  * Created by Administrator on 2017/3/15.
  */
-
-import React, {
-    Component
-}from 'react'
-import {
-    View,
-    StyleSheet,
-    Text,
-    ListView
-}from 'react-native'
+import React, {Component} from "react";
+import {View, StyleSheet, Text, ListView, TouchableOpacity,Navigator} from "react-native";
 import {getDatas} from '../../utils/ApiProvider'
+import {toastShort} from '../../utils/ToastUtils'
+import GiWebView from '../GiWebView'
+
+
 export default class ProgrammingItem extends Component {
     constructor(props) {
         super(props)
@@ -35,7 +31,7 @@ export default class ProgrammingItem extends Component {
     }
 
 
-    getDatas = (type) => {
+    getDatas = function(type) {
         getDatas(type, this.state.page, this.state.num).then(response => {
             let datas = this.state.datas;
             let urls = []
@@ -49,6 +45,7 @@ export default class ProgrammingItem extends Component {
                     images: r1.images,
                     who: r1.who,
                     source: r1.source,
+                    url:r1.url
                 }
                 urls.push(img)
             })
@@ -71,12 +68,30 @@ export default class ProgrammingItem extends Component {
         if (rowData == null)return null
         let sourceType = this.getSourceType(rowData);
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{rowData.title}</Text>
-                <Text style={styles.who}>{rowData.who}</Text>
-                <Text style={[styles.source,sourceType]}>{rowData.source}</Text>
-            </View>
+            <TouchableOpacity onPress={()=>this._nextHtml(rowData)}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{rowData.title}</Text>
+                    <Text style={styles.who}>{rowData.who}</Text>
+                    <Text style={[styles.source,sourceType]}>{rowData.source}</Text>
+                </View>
+            </TouchableOpacity>
+
         )
+    }
+
+    _nextHtml(rowData) {
+        let {navigator}=this.props;
+        if (navigator) {
+            navigator.push(
+                {
+                    title: 'GiWebView',
+                    component: GiWebView,
+                    params:{
+                        url:rowData.url
+                    },
+                }
+            );
+        }
     }
 
     getSourceType(rowData) {
@@ -102,7 +117,7 @@ var styles = StyleSheet.create({
         borderRadius: 1,
         borderColor: '#d3d3d3',
         margin: 5,
-        alignItems:'flex-start'
+        alignItems: 'flex-start'
     },
     title: {
         color: "#1b1b1b",

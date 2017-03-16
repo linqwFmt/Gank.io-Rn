@@ -42,18 +42,20 @@ class Root extends Component {
 
     _renderList() {
         if (this.props.selectIndex == 0) {
-            return (<Daily  />)
+            return (<Daily  {...this.props}/>)
         } else if (this.props.selectIndex == 1) {
             return (<Welfare/>)
         } else if(this.props.selectIndex==2){
-            return(<ProgrammingItem  type="Android"/>)
+            return(<ProgrammingItem  type="Android" {...this.props}/>)
         } else if(this.props.selectIndex==3){
-            return(<ProgrammingItem  type="iOS"/>)
+            return(<ProgrammingItem type="iOS" {...this.props}/>)
         } else if(this.props.selectIndex==4){
-            return(<ProgrammingItem  type="前端"/>)
+            return(<ProgrammingItem  type="前端" {...this.props}/>)
         }else if (this.props.selectIndex == 5) {
-            return (<Welfare/>)
-        } else {
+            return (<ProgrammingItem  type="休息视频" {...this.props}/>)
+        } else if (this.props.selectIndex == 6) {
+            return (<ProgrammingItem  type="拓展资源" {...this.props}/>)
+        }else {
             return (<Welfare/>)
         }
     }

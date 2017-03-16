@@ -57,7 +57,7 @@ export default class Daily extends Component{
     }
     _renderRow(rowData, sectionId, rowId) {
         if (rowData==null)return null
-        return (<ContentItem key={rowId} datas={rowData}/>)
+        return (<ContentItem key={rowId} datas={rowData} {...this.props}/>)
     }
     _renderHeader() {
         if (this.state.ganhuo != null && this.state.ganhuo.length > 0) {

@@ -9,9 +9,11 @@ import {
     Image,
     View,
     StyleSheet,
-    Text
+    Text,
+    TouchableOpacity,Navigator
 }from 'react-native'
 import Common from '../Constants'
+import GiWebView from '../GiWebView'
 export default class ContentItem extends Component {
 
     render() {
@@ -43,19 +45,35 @@ export default class ContentItem extends Component {
     _listItem() {
         let mViews = [];
         for (let i = 0; i < this.props.datas.length; i++)
-            mViews.push(this._article(this.props.datas[i].desc, this.props.datas[i].who))
+            mViews.push(this._article(this.props.datas[i].desc, this.props.datas[i].who,this.props.datas[i].url))
         return (
             mViews
         );
     }
 
-    _article(desc, article) {
+    _article(desc, article,url) {
         return (
+            <TouchableOpacity onPress={()=>this._nextHtml(url)}>
             <View style={styles.articleContainer}>
                 <Text style={styles.desc}>{desc}</Text>
                 <Text style={styles.article}> via. {article}</Text>
             </View>
+            </TouchableOpacity>
         )
+    }
+    _nextHtml(url) {
+        let {navigator}=this.props;
+        if (navigator) {
+            navigator.push(
+                {
+                    title: 'GiWebView',
+                    component: GiWebView,
+                    params:{
+                        url:url
+                    },
+                }
+            );
+        }
     }
 }
 
