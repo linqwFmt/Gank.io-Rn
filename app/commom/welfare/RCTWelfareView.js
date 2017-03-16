@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/3/14.
  */
 import React, {Component, PropTypes}from 'react';
-
+import {toastShort} from '../../utils/ToastUtils'
 import RCTWaterfallView from './RCTWelfareViewManager';
 
 export default class RcWaterfallView extends Component {
@@ -16,7 +16,7 @@ export default class RcWaterfallView extends Component {
         return (
             <RCTWaterfallView
                 {...this.props}
-                onChange={this._onChange}
+                onChange={this._onChange}z
             />
         );
     }
