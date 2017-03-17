@@ -11,6 +11,9 @@ React-Natvie 写Gank.io的demo
 
 界面模仿：https://github.com/CaMnter/EasyGank
 
+
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-5edb1f0d7249a8d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-7085f27c1c60e977.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-aacd138da1b02d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-2baee0dcb0e44cc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-924621b70e587830.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
