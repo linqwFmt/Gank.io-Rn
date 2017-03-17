@@ -1,6 +1,7 @@
 package com.gank;
 
-import android.app.Application;
+import java.util.Arrays;
+import java.util.List;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -8,8 +9,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-import java.util.Arrays;
-import java.util.List;
+import android.app.Application;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -38,4 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+
+
+
 }

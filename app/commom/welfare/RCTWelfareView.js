@@ -9,7 +9,8 @@ export default class RcWaterfallView extends Component {
     //默认属性定义使用static propTypes
     static propTypes = {
         onLoadMore: PropTypes.func,
-        onRefresh:PropTypes.func
+        onRefresh:PropTypes.func,
+        onClickImage:PropTypes.func
     };
 
     render() {
@@ -25,7 +26,7 @@ export default class RcWaterfallView extends Component {
         if(event.nativeEvent.msg=='onLoadMore'){
             this.props.onLoadMore(event.nativeEvent.msg);
         }else{
-            this.props.onRefresh(event.nativeEvent.msg);
+            this.props.onClickImage(event.nativeEvent.msg);
         }
     };
 }

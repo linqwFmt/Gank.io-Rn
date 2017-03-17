@@ -28,12 +28,12 @@ import android.widget.Toast;
  * email :linqw@xinguangnet.com
  */
 
-public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
+public class ReactWaterfallView extends SimpleViewManager<RecyclerView> implements WaterfallAdapter.ClickInterface {
     private RecyclerView mMRecycleView;
     private List<Img> url;
     private WaterfallAdapter mWaterfallAdapter;
 //    private SwipeRefreshLayout mMSwipeRefreshLayout;
-
+    private  ThemedReactContext mreactContext;
     @Override
     public String getName() {
         return "ReactWaterfallView";
@@ -43,7 +43,16 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
     protected RecyclerView createViewInstance(final ThemedReactContext reactContext) {
         mMRecycleView = (RecyclerView) LayoutInflater.from(reactContext).inflate(R.layout.item_react_water_fall, null);
         initRecyclerView(reactContext, mMRecycleView);
+        this.mreactContext=reactContext;
         return mMRecycleView;
+    }
+
+    @Override
+    public void click(String url) {
+        WritableMap nativeEvent = Arguments.createMap();
+        nativeEvent.putString("msg", url);
+        mreactContext.getJSModule(RCTEventEmitter.class).receiveEvent(mMRecycleView.getId(), "topChange",
+                nativeEvent);
     }
 
     private void initRecyclerView(final ThemedReactContext reactContext, final RecyclerView recyclerView) {
@@ -123,7 +132,7 @@ public class ReactWaterfallView extends SimpleViewManager<RecyclerView> {
     }
 
     private void initRecyclerAdapter(ThemedReactContext context, RecyclerView recyclerView) {
-        mWaterfallAdapter = new WaterfallAdapter(context, url);
+        mWaterfallAdapter = new WaterfallAdapter(context, url,this);
         recyclerView.setAdapter(mWaterfallAdapter);
     }
 

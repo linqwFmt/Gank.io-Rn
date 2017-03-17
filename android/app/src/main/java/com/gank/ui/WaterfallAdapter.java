@@ -1,6 +1,5 @@
 package com.gank.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,14 +25,15 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
 
     private List<Img> mDataModels;
     private HashMap<String,Integer> maps;
-
+   private  ClickInterface mClickInterface;
     private int defalutWidth,defaultHight;
 
-    WaterfallAdapter(Context context,List<Img> dataModels) {
+    WaterfallAdapter(Context context,List<Img> dataModels,ClickInterface mClickInterface) {
         mDataModels = dataModels;
         if (maps==null){
             maps=new HashMap<>();
         }
+        this.mClickInterface=mClickInterface;
     }
 
 
@@ -46,7 +46,7 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
 
     @Override
     public void onBindViewHolder(WaterfallViewHolder holder, int position) {
-        String url = mDataModels.get(position).url;
+        final String url = mDataModels.get(position).url;
 //        //改变holder.button的高度
         Integer height = maps.get(url);
         if (height==null||height.equals(0)){
@@ -57,6 +57,12 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
         lp.height = height;
         holder.mIv.setLayoutParams(lp);
         holder.load(url);
+        holder.mIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mClickInterface.click(url);
+            }
+        });
     }
 
 
@@ -85,5 +91,9 @@ public class WaterfallAdapter extends RecyclerView.Adapter<WaterfallAdapter.Wate
         public void load(String url) {
             Glide.with(mIv.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(mIv);
         }
+    }
+
+    interface ClickInterface{
+        void click(String url);
     }
 }

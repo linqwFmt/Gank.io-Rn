@@ -9,6 +9,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.gank.ui.GankPhotoView;
 import com.gank.ui.ReactWaterfallView;
 
 /**
@@ -32,6 +33,7 @@ public class GankViewManager implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> list = new ArrayList<>();
         list.add(new ReactWaterfallView());
+        list.add(new GankPhotoView());
         return list;
     }
 }

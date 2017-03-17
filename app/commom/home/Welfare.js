@@ -10,11 +10,13 @@ import {
     View,
     ListView,
     NativeModules,
-    requireNativeComponent
+    requireNativeComponent,
+    Navigator
 } from 'react-native';
 
 import {getDatas} from '../../utils/ApiProvider'
 import RcWaterfallView from '../welfare/RCTWelfareView';
+import PicView from '../PicView'
 export default class Welfare extends Component {
 
     constructor(props) {
@@ -26,7 +28,7 @@ export default class Welfare extends Component {
             datas: ''
         }
         this._onLoadMore = this._onLoadMore.bind(this);
-        this._onRefresh = this._onRefresh.bind(this);
+        this.onClickImage = this.onClickImage.bind(this);
     }
 
     componentWillMount() {
@@ -58,7 +60,7 @@ export default class Welfare extends Component {
             <RcWaterfallView style={styles.container}
                              data={this.state.datas}
                              onLoadMore={this._onLoadMore}
-                             onRefresh={this._onRefresh}
+                             onClickImage={this.onClickImage}
             >
             </RcWaterfallView>
         )
@@ -71,11 +73,19 @@ export default class Welfare extends Component {
         this.getWelfare()
     }
 
-    _onRefresh() {
-        this.setState({
-            num: 1,
-        })
-        this.getWelfare()
+    onClickImage(url) {
+        let {navigator}=this.props;
+        if (navigator) {
+            navigator.push(
+                {
+                    title: 'PicView',
+                    component: PicView,
+                    params:{
+                        data:url
+                    },
+                }
+            );
+        }
     }
 }
 

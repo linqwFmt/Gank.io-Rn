@@ -16,6 +16,7 @@ import DrawerView from './commom/DrawerView'
 import Daily from './commom/home/Daily'
 import ProgrammingItem from './commom/home/Programming'
 import Welfare from './commom/home/Welfare'
+import GankPhotoView from './commom/photoview/GankPhotoView'
 import {connect}from'react-redux'
 class Root extends Component {
 
@@ -44,18 +45,18 @@ class Root extends Component {
         if (this.props.selectIndex == 0) {
             return (<Daily  {...this.props}/>)
         } else if (this.props.selectIndex == 1) {
-            return (<Welfare/>)
-        } else if(this.props.selectIndex==2){
-            return(<ProgrammingItem  type="Android" {...this.props}/>)
-        } else if(this.props.selectIndex==3){
-            return(<ProgrammingItem type="iOS" {...this.props}/>)
-        } else if(this.props.selectIndex==4){
-            return(<ProgrammingItem  type="前端" {...this.props}/>)
-        }else if (this.props.selectIndex == 5) {
-            return (<ProgrammingItem  type="休息视频" {...this.props}/>)
+            return (<Welfare {...this.props}/>)
+        } else if (this.props.selectIndex == 2) {
+            return (<ProgrammingItem type="Android" {...this.props}/>)
+        } else if (this.props.selectIndex == 3) {
+            return (<ProgrammingItem type="iOS" {...this.props}/>)
+        } else if (this.props.selectIndex == 4) {
+            return (<ProgrammingItem type="前端" {...this.props}/>)
+        } else if (this.props.selectIndex == 5) {
+            return (<ProgrammingItem type="休息视频" {...this.props}/>)
         } else if (this.props.selectIndex == 6) {
-            return (<ProgrammingItem  type="拓展资源" {...this.props}/>)
-        }else {
+            return (<ProgrammingItem type="拓展资源" {...this.props}/>)
+        } else {
             return (<Welfare/>)
         }
     }
