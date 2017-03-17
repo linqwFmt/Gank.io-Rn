@@ -8,4 +8,4 @@ React-Natvie 写Gank.io的demo
 
 
 
-![KS(64NQ75OPB1TP7~]WPJKI.png](http://upload-images.jianshu.io/upload_images/2326281-aacd138da1b02d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![这里写图片描述](http://upload-images.jianshu.io/upload_images/2326281-aacd138da1b02d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
