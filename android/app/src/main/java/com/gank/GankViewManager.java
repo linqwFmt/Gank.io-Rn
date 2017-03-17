@@ -13,9 +13,9 @@ import com.gank.ui.GankPhotoView;
 import com.gank.ui.ReactWaterfallView;
 
 /**
- * Created by 林其望
+ * Created by 否命题
  * create at: 2017/3/14.
- * email :linqw@xinguangnet.com
+ * email :FMT157@126.com
  */
 
 public class GankViewManager implements ReactPackage {

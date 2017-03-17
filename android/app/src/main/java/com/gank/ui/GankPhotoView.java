@@ -14,11 +14,10 @@ import android.widget.Toast;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * Created by 林其望
- * create at: 2017/3/16.
- * email :linqw@xinguangnet.com
+ * Created by 否命题
+ * create at: 2017/3/14.
+ * email :FMT157@126.com
  */
-
 public class GankPhotoView extends SimpleViewManager<ImageView> {
     private PhotoViewAttacher mAttacher;
     private ImageView mImageView;
