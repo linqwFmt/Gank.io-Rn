@@ -60,10 +60,13 @@ export default class ProgrammingItem extends Component {
             <ListView dataSource={this.state.dataSource.cloneWithRows(this.state.datas)}
                       renderRow={this._renderRow.bind(this)}
                       enableEmptySections={true}
+                      onEndReached={this._onEndReached.bind(this)}
             />
         )
     }
-
+    _onEndReached(){
+        console.log('_onEndReached')
+    }
     _renderRow(rowData, sectionId, rowId) {
         if (rowData == null)return null
         let sourceType = this.getSourceType(rowData);
