@@ -5,7 +5,8 @@
 import {
     NetInfo
 }from 'react-native'
-// import toastShort from './ToastUtils'
+import Stroage from './Storage'
+import {toastShort} from './ToastUtils'
 const  GanHuoBaseUrl='http://www.gank.io/api/'
 
 /**
@@ -57,23 +58,32 @@ function  getJsonData(url) {
     return NetInfo
         .isConnected
         .fetch().then((isConnected)=>{
-            // toastShort('请检查当前网络')
             return isConnected
         }).then(isConnected =>{
             if(!isConnected){
-               return{
-                   code:48,
-                   errorMessage:'请检查当前网络'
-               }
+                return Stroage.get(url).then(json=>{
+                    if(json==null||json==''){
+                        return{
+                            code:48,
+                            errorMessage:'网络异常'
+                        }
+                    }else {
+                         return JSON.parse(json)
+                    }
+                })
             }else {
                 return fetch(url,{
                     method:'GET'
                 }).then(response=>{
-                   return response.json()
+
+                    return response.json()
                 })
                     .then((response)=>{
-                    //网络请求成功
+
+                        //网络请求成功
                     if(response.error==false){
+                        //由于目前都是get请求的列表数据展示就每一个的存储
+                        Stroage.save(url,response.results)
                         return response.results;
                     }else{
                         //处理网络失败的数据,也可以返回工具response返回相应code和errorMeeage
