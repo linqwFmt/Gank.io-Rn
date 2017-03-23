@@ -8,7 +8,7 @@ import {
     View,
 } from 'react-native';
 import DrawItem from './DrawerItem'
-let drawItems=[{title:'每日精彩'},{title:'福利'},{title:'Android'},{title:'iOS'},{title:'前端'},{title:'休息视频'},{title:'扩展资源'}]
+let drawItems=[{title:'每日精彩'},{title:'福利'},{title:'Android'},{title:'iOS'},{title:'前端'},{title:'休息视频'},{title:'扩展资源'},{title:'新版本福利2标题'}]
 export default class DrawerView extends Component{
     constructor(props){
         super(props)
